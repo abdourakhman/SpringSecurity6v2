@@ -51,7 +51,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                         null,
                         userDetails.getAuthorities()
                 );
+                //En utilisant WebAuthenticationDetailsSource().buildDetails(request), vous créez un nouvel objet WebAuthenticationDetails en extrayant les informations de la demande HTTP request.
+                //Ces détails peuvent être utiles à des fins de journalisation ou d'audit.
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                //En appelant setAuthentication(authToken), vous indiquez à Spring Security que l'utilisateur a été authentifié avec succès avec les détails contenus dans l'objet authToken.
+                //Cela signifie que l'utilisateur est maintenant considéré comme authentifié dans le système et peut accéder aux ressources sécurisées en fonction de ses rôles et autorisations.
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }
